@@ -2,40 +2,39 @@
   'use strict';
 
   const Task = require('./../model/task.model.js');
-  const User = require('./../model/task.model.js');
+  const SubTask = require('./../model/subtask.model.js');
 
   module.exports = {
-    createTask(req, res) {
-      User.findOne({
-          _id: req.body.userId
+    createSubTask(req, res) {
+      Task.findOne({
+          _id: req.body.taskId
         })
         .exec()
         .then((user) => {
           if (!user) {
             return res.json({
               status: 404,
-              message: 'User not found'
+              message: 'Task not found'
             });
           }
-          Task.findOne({
+          SubTask.findOne({
               title: req.body.title
             })
             .exec()
-            .then((task) => {
+            .then((subTask) => {
               res.status(409).json({
-                message: 'Task already exists'
+                message: 'subTask already exists'
               })
 
-              task = new Task({
+              subTask = new SubTask({
                 title: req.body.title,
                 descrption: req.body.content,
-                userId: req.body.userId,
-                subTask: req.body.subTask
+                taskId: req.body.taskId
               })
 
-              task.save()
-                .then((task) => {
-                  res.json(task);
+              subTask.save()
+                .then((subTask) => {
+                  res.json(subTask);
                 })
                 .catch((err) => {
                   res.status(500).json(err);
@@ -47,83 +46,83 @@
             })
         })
     },
-    getAllTasks(req, res) {
-      Task.find()
+    getAllSubTasks(req, res) {
+      SubTask.find()
         .exec()
         .sort({ 'createdAt': 'descending' })
-        .then((tasks) => {
-          if (!tasks) {
+        .then((subTask) => {
+          if (!subTask) {
             return res.json({
               status: 404,
-              message: 'No tasks  found'
+              message: 'No subTask found'
             });
           }
-          res.send(tasks);
+          res.send(subTask);
         })
         .catch((err) => {
           res.status(500).json(err);
         })
     },
-    getATask(req, res) {
-      Task.findById({ _id: req.params.id })
+    getASubTask(req, res) {
+      SubTask.findById({ _id: req.params.id })
         .exec()
-        .then((task) => {
-          if (!task) {
+        .then((subTask) => {
+          if (!subTask) {
             return res.json({
               status: 404,
-              message: 'No task found'
+              message: 'No subTask found'
             });
           }
-          res.send(task);
+          res.send(subTask);
         })
         .catch((err) => {
           res.status(500).json(err);
         })
     },
-    getTaskByUser(req, res) {
-      Task.find({ userId: req.params.userId })
+    getSubTaskByTask(req, res) {
+      SubTask.find({ taskId: req.params.taskId })
         .exec()
-        .then((task) => {
-          if (!task) {
+        .then((subTask) => {
+          if (!subTask) {
             return res.json({
               status: 404,
-              message: 'No task found'
+              message: 'No subTask found'
             });
           }
-          res.send(task);
+          res.send(subTask);
         })
         .catch((err) => {
           res.status(500).json(err);
         })
     },
-    editTask(req, res) {
-      Task.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    editSubTask(req, res) {
+      SubTask.findByIdAndUpdate({ _id: req.params.id }, req.body)
         .exec()
-        .then((task) => {
-          if (!task) {
+        .then((subTask) => {
+          if (!subTask) {
             return res.json({
               status: 404,
-              message: 'No task found'
+              message: 'No subTask found'
             });
           }
-          res.send(task);
+          res.send(subTask);
         })
         .catch((err) => {
           res.status(500).json(err);
         })
     },
-    deleteTask(req, res) {
-      Task.findByIdAndRemove({ _id: req.params.id })
+    deleteSubTask(req, res) {
+      SubTask.findByIdAndRemove({ _id: req.params.id })
         .exec()
-        .then((task) => {
-          if (!task) {
+        .then((subTask) => {
+          if (!subTask) {
             return res.json({
               status: 404,
-              message: 'No task found'
+              message: 'No subTask found'
             });
           }
           res.json({
-            message: 'Task deleted'
+            message: 'SubTask deleted'
           });
         })
         .catch((err) => {

@@ -22,7 +22,7 @@
         })
         .catch((err) => {
           res.status(500).json(err);
-        });
+        })
     },
     login(req, res) {
       //check if user exists
@@ -57,6 +57,12 @@
       User.find()
         .exec()
         .then((user) => {
+          if (!user) {
+            return res.json({
+              status: 404,
+              message: 'No users  found'
+            });
+          }
           res.send(user);
         })
         .catch((err) => {
@@ -82,6 +88,41 @@
         .catch((err) => {
           res.status(500).json(err);
         })
+    },
+    editUser(req, res) {
+      User.findByIdAndUpdate({ _id: req.params.id }, req.body)
+        .exec()
+        .then((user) => {
+          if (!user) {
+            return res.json({
+              status: 404,
+              message: 'No user found'
+            });
+          }
+          res.send(user);
+        })
+        .catch((err) => {
+          res.status(500).json(err);
+        })
+    },
+    deleteUser(req, res) {
+      User.findByIdAndRemove({ _id: req.params.id })
+        .exec()
+        .then((user) => {
+          if (!user) {
+            return res.json({
+              status: 404,
+              message: 'No user found'
+            });
+          }
+          res.json({
+            message: 'User deleted'
+          });
+        })
+        .catch((err) => {
+          res.status(500).json(err);
+        })
+
     }
   }
 })()
