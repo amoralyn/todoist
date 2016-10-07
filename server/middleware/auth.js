@@ -4,6 +4,7 @@
 
   const config = require('./../config/environment.js');
   const jwt = require('jsonwebtoken');
+  const Task = require('./../model/task.model.js');
 
   module.exports = {
 
@@ -31,7 +32,28 @@
           message: 'No token provided'
         });
       }
+    },
+    userAccess(req, res, next) {
+      Task.findOne({ '_id': req.params.id })
+        .exec()
+        .then((task) => {
+          if (!task) {
+            return res.json({
+              status: 404,
+              message: 'No task found'
+            });
+          }
+          if (req.decoded._id !== task.userId.toString()) {
+            res.status(403).json({
+              message: 'Access Denied'
+            })
+          }
+        })
+        .catch((err) => {
+          res.status(500).json(err);
+        })
     }
+
 
   }
 })();
