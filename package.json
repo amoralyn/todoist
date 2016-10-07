@@ -1,0 +1,31 @@
+{
+  "name": "todoist",
+  "version": "1.0.0",
+  "description": "A To-Do-List Application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andela-ltijesunimi-israel/todoist.git"
+  },
+  "author": "Lovelyn Tijesunimi-Israel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andela-ltijesunimi-israel/todoist/issues"
+  },
+  "homepage": "https://github.com/andela-ltijesunimi-israel/todoist#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.3",
+    "morgan": "^1.7.0"
+  }
+}
