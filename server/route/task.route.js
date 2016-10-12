@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const Task = require('./../controller/task.controller.js');
+  const taskController = require('./../controller/task.controller.js');
   const auth = require('./../middleware/auth.js');
 
   module.exports = (router) => {
@@ -10,20 +10,20 @@
 
     //route to create a new task
     router.route('/tasks')
-      .post(Task.createTask)
-      .get(Task.getAllTasks);
+      .post(taskController.createTask)
+      .get(taskController.getAllTasks);
 
     //route to get all tasks of a specific user
     router.route('/user/:userId/tasks')
-      .get(Task.getTaskByUser);
+      .get(taskController.getTaskByUser);
 
     //route to get a document by its Id
     router.route('/tasks/:id')
-      .get(Task.getATask)
+      .get(taskController.getATask)
       .put(auth.userAccess,
-        Task.editTask)
+        taskController.editTask)
       .delete(auth.userAccess,
-        Task.deleteTask);
+        taskController.deleteTask);
   }
 
 })();

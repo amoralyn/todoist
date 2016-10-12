@@ -6,45 +6,34 @@
 
   module.exports = {
     createSubTask(req, res) {
-      Task.findOne({
-          _id: req.body.taskId
+      let subTask = new SubTask({
+        description: req.body.description
+,
+        taskId: req.body.taskId
+      });
+
+      function addSubTaskIdToTask(id) {
+        Task.update({ _id: req.decoded._id }, {
+            $push: {
+              subTasks: id
+            }
+          })
+          .exec()
+          .then((done) => {
+            res.json(subTask)
+          })
+          .catch((err) => {
+            res.status(500).json(err)
+          })
+      }
+
+      subTask.save()
+        .then((subTask) => {
+          addSubTaskIdToTask(subTask._id)
         })
-        .exec()
-        .then((user) => {
-          if (!user) {
-            return res.json({
-              status: 404,
-              message: 'Task not found'
-            });
-          }
-          SubTask.findOne({
-              title: req.body.title
-            })
-            .exec()
-            .then((subTask) => {
-              res.status(409).json({
-                message: 'subTask already exists'
-              })
-
-              subTask = new SubTask({
-                title: req.body.title,
-                descrption: req.body.content,
-                taskId: req.body.taskId
-              })
-
-              subTask.save()
-                .then((subTask) => {
-                  res.json(subTask);
-                })
-                .catch((err) => {
-                  res.status(500).json(err);
-                });
-
-            })
-            .catch((err) => {
-              res.status(500).json(err);
-            })
-        })
+        .catch((err) => {
+          res.status(500).json(err);
+        });
     },
     getAllSubTasks(req, res) {
       SubTask.find()

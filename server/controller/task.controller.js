@@ -6,51 +6,40 @@
 
   module.exports = {
     createTask(req, res) {
-      User.findOne({
-          _id: req.body.userId
+      let task = new Task({
+        title: req.body.title,
+        description: req.body.description,
+        userId: req.body.userId,
+        done: false
+      });
+
+
+      function addTaskIdToUser(id) {
+        return User.update({ _id: req.decoded.id }, {
+            $push: {
+              tasks: id
+            }
+          })
+          .exec()
+          .then((done) => {
+            res.json(task)
+          })
+          .catch((err) => {
+            res.status(500).json(err)
+          })
+      }
+
+      task.save()
+        .then((task) => {
+          return addTaskIdToUser(task._id)
         })
-        .exec()
-        .then((user) => {
-          if (!user) {
-            return res.json({
-              status: 404,
-              message: 'User not found'
-            });
-          }
-          Task.findOne({
-              title: req.body.title
-            })
-            .exec()
-            .then((task) => {
-              res.status(409).json({
-                message: 'Task already exists'
-              })
-
-              task = new Task({
-                title: req.body.title,
-                descrption: req.body.content,
-                userId: req.body.userId,
-                subTask: req.body.subTask
-              })
-
-              task.save()
-                .then((task) => {
-                  res.json(task);
-                })
-                .catch((err) => {
-                  res.status(500).json(err);
-                });
-
-            })
-            .catch((err) => {
-              res.status(500).json(err);
-            })
-        })
+        .catch((err) => {
+          res.status(500).json(err);
+        });
     },
     getAllTasks(req, res) {
-      Task.find()
+      Task.find({})
         .exec()
-        .sort({ 'createdAt': 'descending' })
         .then((tasks) => {
           if (!tasks) {
             return res.json({

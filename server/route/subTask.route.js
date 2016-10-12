@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const SubTask = require('./../controller/subTask.controller.js');
+  const subTaskController = require('./../controller/subTask.controller.js');
   const auth = require('./../middleware/auth.js');
 
   module.exports = (router) => {
@@ -10,19 +10,19 @@
 
     //route to create a new subtask
     router.route('/subtasks')
-      .post(SubTask.createSubTask)
-      .get(SubTask.getAllSubTasks);
+      .post(subTaskController.createSubTask)
+      .get(subTaskController.getAllSubTasks);
 
     //route to get all tasks of a specific user
     router.route('/task/:taskId/subtasks')
-      .get(SubTask.getSubTaskByTask);
+      .get(subTaskController.getSubTaskByTask);
 
     //route to get a subtask by its Id
     router.route('/subtasks/:id')
-      .get(SubTask.getASubTask)
+      .get(subTaskController.getASubTask)
       .put(auth.userAccess,
-        SubTask.editSubTask)
+        subTaskController.editSubTask)
       .delete(auth.userAccess,
-        SubTask.deleteSubTask);
+        subTaskController.deleteSubTask);
   }
 })();

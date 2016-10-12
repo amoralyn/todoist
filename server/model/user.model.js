@@ -6,8 +6,7 @@
   const saltFactor = require('./../config/environment.js').saltFactor;
   const ObjectId = Schema.Types.ObjectId;
 
-
-  const userSchema = new Schema({
+  let userSchema = new Schema({
     name: {
       firstName: {
         type: String,
@@ -33,7 +32,7 @@
     username: {
       type: String,
       required: true,
-      unique: true,
+      unique: [true, 'username already taken'],
       validate: {
         validator: (username) => {
           return /\w+/.test(username);
@@ -43,8 +42,8 @@
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: [true, 'Email is required for account registration'],
+      unique: [true, 'Email already in use'],
       validate: {
         validator: (email) => {
           return /\S+@\S+\.\S+/.test(email);
@@ -54,7 +53,7 @@
     },
     password: {
       type: String,
-      required: true,
+      required: [true, 'Password is required for account registration'],
       validate: {
         validator: (password) => {
           return /\w+/.test(password);
@@ -81,6 +80,19 @@
 
   userSchema.pre('save', function(next) {
     let user = this;
+
+    // get the current date
+    var currentDate = new Date();
+
+    // change the updatedAt field to current date
+    this.updatedAt = currentDate;
+
+    // if createdAt doesn't exist, add to that field
+    if (!this.createdAt) {
+      this.createdAtt = currentDate;
+      next();
+    }
+
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) {
       return next();

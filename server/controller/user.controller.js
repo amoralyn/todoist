@@ -6,6 +6,7 @@
   const config = require('./../config/environment.js');
   const jwt = require('jsonwebtoken');
   const bcrypt = require('bcrypt');
+  // const parser = require('./../error.js').parse;
 
   module.exports = {
 
@@ -42,7 +43,7 @@
           if (bcrypt.compareSync(req.body.password, user.password)) {
             // if user was found and password matches
             // create token 
-            const token = jwt.sign(user._id, config.secretKey, {
+            const token = jwt.sign({ id: user._id }, config.secretKey, {
               expiresIn: 60 * 60 * 24
             });
             return res.status(200).json({ user, token });
@@ -80,7 +81,7 @@
         })
     },
     getUserById(req, res) {
-      User.findById(req.params._id)
+      User.findById({ _id: req.params.id })
         .exec()
         .then((user) => {
           res.send(user);
@@ -122,7 +123,20 @@
         .catch((err) => {
           res.status(500).json(err);
         })
+    }
 
+    logout(req, res) {
+      User.findByIdAndUpdate({
+          _id: req.params.id,
+          token: null
+        })
+        .exec()
+        .then(() => {
+          res.json({
+            status: 200,
+            message: 'Successfully logged out'
+          })
+        })
     }
   }
 })()

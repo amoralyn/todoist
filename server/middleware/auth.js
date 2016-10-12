@@ -18,6 +18,7 @@
         jwt.verify(token, config.secretKey, function(err, decoded) {
           if (err) {
             return res.status(401).json({
+              error: err,
               message: 'Failed to authenticate token'
             });
           } else {
@@ -43,11 +44,12 @@
               message: 'No task found'
             });
           }
-          if (req.decoded._id !== task.userId.toString()) {
+          if (req.decoded.id !== task.userId.toString()) {
             res.status(403).json({
               message: 'Access Denied'
             })
           }
+          next();
         })
         .catch((err) => {
           res.status(500).json(err);

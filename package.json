@@ -4,8 +4,8 @@
   "description": "A To-Do-List Application",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha tests/server --colors"
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,22 @@
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "dotenv": "^2.0.0",
+    "expect.js": "^0.3.1",
     "express": "^4.14.0",
+    "faker": "^3.1.0",
+    "istanbul": "^0.4.5",
     "jsonwebtoken": "^7.1.9",
+    "mocha": "^3.1.1",
     "mongoose": "^4.6.3",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "supertest": "^2.0.0"
+  },
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-uglify": "^2.0.0",
+    "gutil": "^1.6.4",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

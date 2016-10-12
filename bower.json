@@ -1,0 +1,32 @@
+{
+  "name": "todoist",
+  "description": "A To-Do-List Application",
+  "main": "index.js",
+  "authors": [
+    "Lovelyn Tijesunimi-Israel"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Rest-Api",
+    "Express",
+    "jwt",
+    "Mon"
+  ],
+  "homepage": "https://github.com/andela-ltijesunimi-israel/todoist#readme",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3"
+  },
+  "devDependencies": {
+    "angular-ui-router": "^0.3.1"
+  }
+}

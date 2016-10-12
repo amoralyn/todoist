@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ToDoIst</title>
+  <link rel="stylesheet" type="text/css" href="./../styles/app.css">
+</head>
+
+<body>
+  <div class="body">
+    <div class="header-div">
+      <div class="app-name" align="left">
+        <h1>ToDoIst</h1>
+      </div>
+      <div class="user-info" align="right">
+        <h3>User Info</h3>
+      </div>
+    </div>
+    <div class=" container">
+      <div class="timer">
+        <span id="minutes">25</span>
+        <span>:</span>
+        <span id="seconds">00</span>
+        <span>:</span>
+        <span id="micro-seconds">00</span>
+      </div>
+      <div class="to-do">
+        <div class='tasks'>
+          <div class='task' ng-repeat='task in tasks'>
+            <div>{{task.title}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
