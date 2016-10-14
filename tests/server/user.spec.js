@@ -21,7 +21,7 @@
           .send(userCredentials)
           .end((err, res) => {
             if (err) {
-              throw err;
+              return done(err);
             }
             expect(res.body).to.be.an('object');
             expect(res.body.username).to.eql(userCredentials.username);
@@ -114,7 +114,6 @@
           .post('/api/users')
           .send(userCredentials)
           .end((err, res) => {
-            console.log(res.body);
             done();
           })
       })
@@ -152,7 +151,6 @@
             let error = res.body;
             let expectedError = 'Authentication failed, User not found'
             expect(error.status).to.be(404);
-            console.log(error);
             expect(error.message).to.eql(expectedError);
             expect(error).to.be.an('object');
             done();

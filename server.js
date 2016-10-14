@@ -32,14 +32,17 @@
 
   app.use('/api', router);
 
-  app.get('/*', function(req, res) {
+  app.get('/*', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
   });
 
+  // app.use('/', (req, res) => {
+  //   res.send('')
+  // })
 
 
   // Listen to port
-  app.listen(config.port || 30390, function(err) {
+  app.listen(config.port, (err) => {
     if (err) {
       throw err;
     };

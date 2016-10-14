@@ -10,16 +10,16 @@
     title: {
       type: String,
       required: true,
-      unique: true
+      unique: [true, 'Task already exists']
     },
     description: {
       type: String,
-      required: true
+      required: [true, 'Description is required']
     },
     userId: {
       type: ObjectId,
       ref: 'User',
-      required: true
+      required: [true, 'UserId is required']
     },
     subTask: [{
       type: ObjectId,

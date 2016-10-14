@@ -123,13 +123,12 @@
         .catch((err) => {
           res.status(500).json(err);
         })
-    }
+    },
 
     logout(req, res) {
       User.findByIdAndUpdate({
-          _id: req.params.id,
-          token: null
-        })
+          _id: req.params.id
+        }, { token: null })
         .exec()
         .then(() => {
           res.json({

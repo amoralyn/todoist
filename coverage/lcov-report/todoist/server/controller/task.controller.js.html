@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">15.79% </span>
+        <span class="strong">31.58% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/38</span>
+        <span class='fraction'>12/38</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">28.57% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/7</span>
+        <span class='fraction'>2/7</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">15.79% </span>
+        <span class="strong">31.58% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/38</span>
+        <span class='fraction'>12/38</span>
       </div>
     </div>
   </div>
@@ -176,7 +176,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,26 +185,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -300,8 +300,8 @@
   const User = require('./../model/task.model.js');
 &nbsp;
   module.exports = {
-    createTask<span class="fstat-no" title="function not covered" >(req, res) {</span>
-<span class="cstat-no" title="statement not covered" >      let task = new Task({</span>
+    createTask(req, res) {
+      let task = new Task({
         title: req.body.title,
         description: req.body.description,
         userId: req.body.userId,
@@ -309,27 +309,27 @@
       });
 &nbsp;
 &nbsp;
-<span class="fstat-no" title="function not covered" >      function addTaskIdToUser(id) {</span>
-<span class="cstat-no" title="statement not covered" >        return User.update({ _id: req.decoded.id }, {</span>
+      function addTaskIdToUser(id) {
+        return User.update({ _id: req.decoded.id }, {
             $push: {
               tasks: id
             }
           })
           .exec()
           .then((done) =&gt; {
-<span class="cstat-no" title="statement not covered" >            res.json(task)</span>
+            res.json(task)
           })
           .catch((err) =&gt; {
 <span class="cstat-no" title="statement not covered" >            res.status(500).json(err)</span>
           })
       }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      task.save()</span>
+      task.save()
         .then((task) =&gt; {
-<span class="cstat-no" title="statement not covered" >          return addTaskIdToUser(task._id)</span>
+          return addTaskIdToUser(task._id)
         })
         .catch((err) =&gt; {
-<span class="cstat-no" title="statement not covered" >          res.status(500).json(err);</span>
+          res.status(500).json(err);
         });
     },
     getAllTasks<span class="fstat-no" title="function not covered" >(req, res) {</span>
@@ -424,7 +424,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Oct 12 2016 12:18:43 GMT+0100 (WAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Oct 14 2016 15:46:25 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
