@@ -1,15 +1,67 @@
-<form>
-  <div class="form-group">
-    <label for="username">Username:</label>
-    <input type="username" class="form-control" id="username" placeholder="Username">
+<div class="body">
+  <div class="container">
+    <div class="col-xs-12 form-container">
+      <div class="col-xs-12 flex align-center">
+        <div class="app-name col-xs-4 flex align-center" style="margin-left: 419px ">
+          <div class="inline-block svg-cont">
+            <svg width="56px" height="51px" viewBox="346 50 56 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path d="M373.97452,88.4969578 C373.958007,88.4969578 373.942129,88.4944174 373.925616,88.4944174 L376.462865,90.6785474 L371.338829,90.6785474 L373.877983,88.4944174 C363.337762,88.4683781 353.858168,84.4081446 347.270212,77.9446696 C347.979626,89.2908405 356.220128,98.102938 370.120696,100 L377.828344,100 C391.728911,98.1048433 399.968143,89.294016 400.678827,77.9453047 C394.068642,84.428468 384.552212,88.4969578 373.97452,88.4969578 Z M372.986294,54.4035665 C373.942764,54.0663252 374.313666,54.0663252 375.269501,54.4035665 C376.251375,52.6633758 377.755941,51.0298828 379.329099,50.4405043 C376.060843,49.8593822 372.15367,49.8543014 368.863821,50.4189107 C370.459842,50.9886009 371.991718,52.6398768 372.986294,54.4035665 Z M375.26068,57.9709448 L372.859344,57.9709448 C372.859344,57.9709448 372.443349,55.8884319 372.859344,55.440682 C373.283595,54.9840407 374.883427,54.9383131 375.261315,55.440682 C375.629677,55.9328893 375.26068,57.9709448 375.26068,57.9709448 Z M398.998635,63.9462954 C400.903953,62.040977 391.377361,49.3388545 382.485875,55.0548097 C383.848178,53.919875 384.480109,53.6296315 384.987558,53.2993763 C384.387383,52.4908862 383.331837,51.8329163 381.987317,51.3248314 C380.756481,52.5944085 379.256361,54.7182034 379.256361,56.4158421 C384.263537,54.6743811 389.035725,54.27871 392.768243,58.4284934 C386.309849,57.9153277 383.408049,57.696216 381.129289,59.4084622 C383.000946,60.4284426 385.20667,62.2251578 384.963424,68.3215415 C375.578461,58.9365783 371.520133,58.9359432 362.132629,68.3215415 C361.889384,62.2245227 364.094472,60.4284426 365.96613,59.4084622 C363.688004,57.696216 360.785569,57.9153277 354.327175,58.4284934 C358.059694,54.27871 362.833786,54.6743811 367.839693,56.4158421 C367.839693,54.6940694 366.29702,52.5334383 365.056023,51.2702123 C363.689909,51.7643248 362.601338,52.4064171 361.961151,53.1952189 C362.575933,53.5350007 363.109422,53.8017453 364.612719,55.0548097 C355.721233,49.3388545 346.194641,62.040977 348.099959,63.9462954 C345.107974,65.4419704 346.030784,72.8092014 346.566178,75.9059789 C347.288929,76.6319052 348.054232,77.3216304 348.846209,77.9865866 L348.846209,75.798646 L349.481315,76.3562691 L349.481315,78.509914 C352.541892,80.9582481 356.069271,82.9480356 359.931351,84.3573361 L359.931351,82.3211859 L360.566458,82.5784039 L360.566458,84.5808935 C364.523169,85.9457365 368.814581,86.7078639 373.303511,86.7339032 L373.303511,85.0127656 L373.939252,85.0127656 L373.939252,86.7300926 C384.511229,86.6284756 393.992093,82.4691656 400.530511,75.9047087 C401.067175,72.8104716 401.99062,65.4426055 398.998635,63.9462954 Z" id="Combined-Shape-Copy-2" stroke="none" fill="#fff" fill-rule="evenodd"></path>
+            </svg>
+          </div>
+          <h2 class="normal-font dooeet">Dooeet!</h2>
+        </div>
+      </div>
+      <div class="row col-xs-12 forms">
+        <div class="col-xs-4  col-xs-offset-2">
+          <div class="padding container-overlay">
+            <div class="row">
+              <div>
+                <div class="col-xs-12">
+                  <form class="form-horizontal" name="RegistrationForm" ng-controller="userController">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" ng-model="user.username" class="form-control" placeholder="USERNAME" required>
+            </div>
+            <div class="form-group">
+              <input type="email" ng-model="user.email" class="form-control" placeholder="EMAIL" required>
+            </div>
+            <div class="form-group">
+              <input type="password" ng-model="user.password" class="form-control" required placeholder="PASSWORD">
+            </div>
+            <div class="form-group">
+              <input type="submit" ng-click="register(user)" class="btn btn-default" value="SIGN UP">
+            </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-xs-4 ">
+          <div class='padding container-overlay '>
+            <div class="row">
+              <div>
+                <div class=" col-xs-12">
+                  <form name="LoginForm" ng-controller="userController">
+                    <div class="form-group">
+                      <input type="email" ng-model="user.email" class="form-control" placeholder="EMAIL" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" ng-model="user.password" class="form-control" required placeholder="PASSWORD">
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" ng-click="login(user)" class="btn btn-default" value="LOGIN">
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="signature">
+      <p>Made with <i class="fa fa-heart"></i> by Amoralyn</p>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email" placeholder="Email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" class="form-control" id="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+</div>
+</div>

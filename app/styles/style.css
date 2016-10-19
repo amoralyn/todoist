@@ -1,0 +1,192 @@
+body {
+  color: #FFFFFF;
+  background-image: url('../images/StockSnap_PKIAXWCG14.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.modal {
+  color: black;
+}
+
+.body {
+  height: 100vh;
+  position: relative;
+}
+
+.body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(38, 11, 104, 0.5);
+}
+
+.light-font {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+.thin-font {
+  font-family: 'Lato', sans-serif;
+  font-weight: 100;
+}
+
+.normal-font {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+
+.bold-font {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+}
+
+.dooeet {}
+
+.border {
+  border: 1px solid black;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.user-profile {
+  padding: 11px 16px;
+  border-radius: 50%;
+  background-color: #b5acbb;
+}
+
+#user-info-settings-text {
+  padding: 0 15px;
+  display: none;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.svg-cont {
+  margin-top: 8px;
+}
+
+.dooeet {
+  padding: 3px 2px;
+}
+
+.timer-font {
+  font-size: 200px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.unset-padding {
+  padding: unset;
+}
+
+.font-24 {
+  font-size: 24px;
+}
+
+.adjust-btn {
+  border: unset;
+}
+
+.settings-container {
+  padding: 20px 0;
+  margin-top: 80px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.timer-inner-container {
+  padding: 32px 0;
+}
+
+.tasks-container {
+  height: 591px;
+  overflow-y: scroll;
+  position: relative;
+  padding: 10px;
+}
+
+.container-overlay {
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(150, 150, 150, .5);
+  background-color: rgba(255, 255, 255, .25);
+  padding: 15px;
+}
+
+.tasks-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+}
+
+input.task-search {
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 40px;
+  position: relative;
+}
+
+.search-icon-span {
+  position: absolute;
+  right: 25px;
+  font-size: 26px;
+}
+
+.new-task-btn {
+  height: 40px;
+  width: 40px;
+}
+
+.tasks-list li {
+  list-style: none;
+  padding: unset;
+}
+
+.form-container {
+  margin-top: 108px;
+}
+
+.app-name {
+  margin-left: : 419px;
+}
+
+.forms {
+  margin-top: 55px;
+}
+
+
+/*.signature {
+  text-align: center;
+}
+*/
+
+div p {
+  color: #ffffff;
+}

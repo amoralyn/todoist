@@ -9,8 +9,7 @@
   let taskSchema = new Schema({
     title: {
       type: String,
-      required: true,
-      unique: [true, 'Task already exists']
+      required: [true, 'Title is required']
     },
     description: {
       type: String,
@@ -21,9 +20,8 @@
       ref: 'User',
       required: [true, 'UserId is required']
     },
-    subTask: [{
+    subTasks: [{
       type: ObjectId,
-      required: false,
       ref: 'SubTask'
     }],
     createdAt: {

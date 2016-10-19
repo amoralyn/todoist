@@ -14,8 +14,8 @@
       .get(subTaskController.getAllSubTasks);
 
     //route to get all tasks of a specific user
-    router.route('/task/:taskId/subtasks')
-      .get(subTaskController.getSubTaskByTask);
+    // router.route('/task/:taskId/subtasks')
+    //   .get(subTaskController.getSubTaskByTask);
 
     //route to get a subtask by its Id
     router.route('/subtasks/:id')

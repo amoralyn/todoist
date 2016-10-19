@@ -63,7 +63,6 @@
     },
     tasks: [{
       type: ObjectId,
-      required: false,
       ref: 'Task'
     }],
     createdAt: {

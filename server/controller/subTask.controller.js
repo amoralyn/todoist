@@ -6,116 +6,112 @@
 
   module.exports = {
     createSubTask(req, res) {
+      let taskId = req.query.taskId;
       let subTask = new SubTask({
-        description: req.body.description
-,
-        taskId: req.body.taskId
+        description: req.body.description,
+        taskId: taskId
       });
 
-      function addSubTaskIdToTask(id) {
-        Task.update({ _id: req.decoded._id }, {
-            $push: {
-              subTasks: id
-            }
-          })
+      function addSubTaskIdToTask(id, subTask) {
+
+        let update = {
+          $push: { subTasks: id }
+        };
+        return Task
+          .findByIdAndUpdate(taskId, update)
           .exec()
           .then((done) => {
-            res.json(subTask)
+            return res.status(200).json(subTask)
           })
           .catch((err) => {
-            res.status(500).json(err)
+            return res.status(500).json(err)
           })
       }
 
       subTask.save()
         .then((subTask) => {
-          addSubTaskIdToTask(subTask._id)
+          return addSubTaskIdToTask(subTask._id, subTask)
         })
         .catch((err) => {
-          res.status(500).json(err);
+          return res.status(500).json(err);
         });
     },
     getAllSubTasks(req, res) {
       SubTask.find()
         .exec()
-        .sort({ 'createdAt': 'descending' })
         .then((subTask) => {
           if (!subTask) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No subTask found'
             });
           }
-          res.send(subTask);
+          return res.status(200).json(subTask);
         })
         .catch((err) => {
-          res.status(500).json(err);
+          return res.status(500).json(err);
         })
     },
     getASubTask(req, res) {
-      SubTask.findById({ _id: req.params.id })
+      SubTask.findById(taskId)
         .exec()
         .then((subTask) => {
           if (!subTask) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No subTask found'
             });
           }
-          res.send(subTask);
+          return res.send(subTask);
         })
         .catch((err) => {
-          res.status(500).json(err);
+          return res.status(500).json(err);
         })
     },
-    getSubTaskByTask(req, res) {
-      SubTask.find({ taskId: req.params.taskId })
-        .exec()
-        .then((subTask) => {
-          if (!subTask) {
-            return res.json({
-              status: 404,
-              message: 'No subTask found'
-            });
-          }
-          res.send(subTask);
-        })
-        .catch((err) => {
-          res.status(500).json(err);
-        })
-    },
+    // getSubTaskByTask(req, res) {
+    //   SubTask.find(taskId)
+    //     .exec()
+    //     .then((subTask) => {
+    //       if (!subTask) {
+    //         return res.json({
+    //           status: 404,
+    //           message: 'No subTask found'
+    //         });
+    //       }
+    //       return res.send(subTask);
+    //     })
+    //     .catch((err) => {
+    //       return res.status(500).json(err);
+    //     })
+    // },
     editSubTask(req, res) {
-      SubTask.findByIdAndUpdate({ _id: req.params.id }, req.body)
+      SubTask.findByIdAndUpdate(taskId, req.body)
         .exec()
         .then((subTask) => {
           if (!subTask) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No subTask found'
             });
           }
-          res.send(subTask);
+          return res.status(200).json(subTask);
         })
         .catch((err) => {
-          res.status(500).json(err);
+          return res.status(500).json(err);
         })
     },
     deleteSubTask(req, res) {
-      SubTask.findByIdAndRemove({ _id: req.params.id })
+      SubTask.findByIdAndRemove(taskId)
         .exec()
         .then((subTask) => {
           if (!subTask) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No subTask found'
             });
           }
-          res.json({
+          return res.status(200).json({
             message: 'SubTask deleted'
           });
         })
         .catch((err) => {
-          res.status(500).json(err);
+          return res.status(500).json(err);
         })
 
     }

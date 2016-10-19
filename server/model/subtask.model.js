@@ -13,7 +13,7 @@
     taskId: {
       type: ObjectId,
       ref: 'Task',
-      required: true
+      // required: true
     },
     createdAt: {
       type: Date,

@@ -6,7 +6,6 @@
   const config = require('./../config/environment.js');
   const jwt = require('jsonwebtoken');
   const bcrypt = require('bcrypt');
-  // const parser = require('./../error.js').parse;
 
   module.exports = {
 
@@ -19,7 +18,11 @@
 
       user.save()
         .then((user) => {
-          res.json(user);
+          user.password = undefined;
+          res.status(200).json({
+            user,
+            message: 'User successfully created'
+          });
         })
         .catch((err) => {
           res.status(500).json(err);
@@ -34,8 +37,7 @@
         .then((user) => {
           // if user does not exist
           if (!user) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'Authentication failed, User not found'
             });
           }
@@ -46,6 +48,7 @@
             const token = jwt.sign({ id: user._id }, config.secretKey, {
               expiresIn: 60 * 60 * 24
             });
+            user.password = undefined;
             return res.status(200).json({ user, token });
           }
 
@@ -55,33 +58,24 @@
         })
     },
     getAllUsers(req, res) {
-      User.find()
+      User.find({})
         .exec()
-        .then((user) => {
-          if (!user) {
-            return res.json({
-              status: 404,
-              message: 'No users  found'
+        .then((users) => {
+          if (!users) {
+            return res.status(404).json({
+              message: 'No users found '
             });
           }
-          res.send(user);
+          res.status(200).json(
+              users
+            )
+            .catch((err) => {
+              res.status(500).json(err);
+            })
         })
-        .catch((err) => {
-          res.status(500).json(err);
-        })
-    },
-    getUser(req, res) {
-      User.findOne({ name: req.params.name })
-        .exec()
-        .then((user) => {
-          res.send(user);
-        })
-        .catch((err) => {
-          res.status(500).json(err);
-        })
-    },
+    }
     getUserById(req, res) {
-      User.findById({ _id: req.params.id })
+      User.findById({ _id: req.params.id }, '-password -__v')
         .exec()
         .then((user) => {
           res.send(user);
@@ -91,16 +85,18 @@
         })
     },
     editUser(req, res) {
-      User.findByIdAndUpdate({ _id: req.params.id }, req.body)
+      User.findByIdAndUpdate(req.decoded.id, req.body, '-password')
         .exec()
         .then((user) => {
           if (!user) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No user found'
             });
           }
-          res.send(user);
+          res.json({
+            user,
+            message: 'User updated'
+          });
         })
         .catch((err) => {
           res.status(500).json(err);
@@ -111,8 +107,7 @@
         .exec()
         .then((user) => {
           if (!user) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No user found'
             });
           }
@@ -122,19 +117,6 @@
         })
         .catch((err) => {
           res.status(500).json(err);
-        })
-    },
-
-    logout(req, res) {
-      User.findByIdAndUpdate({
-          _id: req.params.id
-        }, { token: null })
-        .exec()
-        .then(() => {
-          res.json({
-            status: 200,
-            message: 'Successfully logged out'
-          })
         })
     }
   }

@@ -63,23 +63,5 @@
         })
     });
 
-    it('Should not create a task without a user id', (done) => {
-      request(app)
-        .post('/api/tasks')
-        .set('x-access-token', jwtToken)
-        .send(newTask)
-        .end((err, res) => {
-          if (err) {
-            return done(err)
-          }
-          let error = res.body.errors.userId.message;
-          expect(res.body.message).to.eql('Task validation failed');
-          expect(res.body).to.be.an('object');
-          expect(error).to.be.eql('UserId is required');
-          expect(error).to.be.a('string');
-          done();
-        })
-
-    })
   })
 })();

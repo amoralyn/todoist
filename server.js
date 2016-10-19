@@ -15,6 +15,11 @@
   mongoose.Promise = bluebird;
 
   routes(router);
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Accept, Content-Type');
+    next();
+  })
 
   app.use(morgan('dev'));
   app.use(bodyParser.json());
@@ -23,7 +28,7 @@
   }));
 
   app.use(methodOverride());
-  app.use(cors());
+
 
   app.use(express.static(__dirname + '/public/'));
 
@@ -35,10 +40,6 @@
   app.get('/*', (req, res) => {
     res.sendFile(__dirname + '/public/index.html')
   });
-
-  // app.use('/', (req, res) => {
-  //   res.send('')
-  // })
 
 
   // Listen to port

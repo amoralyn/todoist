@@ -23,9 +23,9 @@
             if (err) {
               return done(err);
             }
+            console.log(res.body, 'user');
             expect(res.body).to.be.an('object');
             expect(res.body.username).to.eql(userCredentials.username);
-            expect(res.body.password).to.be.a('string');
             expect(res.body).to.not.be.empty();
             done();
           });

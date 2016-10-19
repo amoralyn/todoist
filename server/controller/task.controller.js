@@ -2,27 +2,29 @@
   'use strict';
 
   const Task = require('./../model/task.model.js');
-  const User = require('./../model/task.model.js');
+  const User = require('./../model/user.model.js');
 
   module.exports = {
     createTask(req, res) {
+      let userId = req.decoded.id;
       let task = new Task({
         title: req.body.title,
         description: req.body.description,
-        userId: req.body.userId,
+        userId: userId,
         done: false
       });
 
+      function addTaskIdToUser(id, task) {
 
-      function addTaskIdToUser(id) {
-        return User.update({ _id: req.decoded.id }, {
-            $push: {
-              tasks: id
-            }
-          })
+        let update = {
+          $push: { tasks: id }
+        };
+
+        return User
+          .findByIdAndUpdate(req.decoded.id, update, { safe: true, upsert: true })
           .exec()
-          .then((done) => {
-            res.json(task)
+          .then(() => {
+            res.status(200).json(task)
           })
           .catch((err) => {
             res.status(500).json(err)
@@ -31,23 +33,23 @@
 
       task.save()
         .then((task) => {
-          return addTaskIdToUser(task._id)
+          return addTaskIdToUser(task._id, task)
         })
         .catch((err) => {
           res.status(500).json(err);
         });
     },
+
     getAllTasks(req, res) {
       Task.find({})
         .exec()
         .then((tasks) => {
           if (!tasks) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No tasks  found'
             });
           }
-          res.send(tasks);
+          res.status(200).json(tasks);
         })
         .catch((err) => {
           res.status(500).json(err);
@@ -58,12 +60,11 @@
         .exec()
         .then((task) => {
           if (!task) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No task found'
             });
           }
-          res.send(task);
+          res.status(200).json(task);
         })
         .catch((err) => {
           res.status(500).json(err);
@@ -74,12 +75,11 @@
         .exec()
         .then((task) => {
           if (!task) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No task found'
             });
           }
-          res.send(task);
+          res.status(200).json(task);
         })
         .catch((err) => {
           res.status(500).json(err);
@@ -90,12 +90,14 @@
         .exec()
         .then((task) => {
           if (!task) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No task found'
             });
           }
-          res.send(task);
+          res.status(200).json({
+            task,
+            message: 'Task successfully updated'
+          });
         })
         .catch((err) => {
           res.status(500).json(err);
@@ -106,8 +108,7 @@
         .exec()
         .then((task) => {
           if (!task) {
-            return res.json({
-              status: 404,
+            return res.status(404).json({
               message: 'No task found'
             });
           }

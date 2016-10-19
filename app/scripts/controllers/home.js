@@ -1,7 +1,7 @@
-angular.module('toDoIst')
+angular.module('dooeet')
   .controller('homeController', [
-    '$scope',
-    function($scope) {
+    '$scope', 'AuthService',
+    function($scope, AuthService) {
       $scope.tasks = [{
         title: 'Finish the damn app',
         description: 'Do this and that'
@@ -10,5 +10,8 @@ angular.module('toDoIst')
         description: 'Do that and this'
       }];
 
+      $scope.userExist = function() {
+        return AuthService.userExist();
+      }
     }
   ])

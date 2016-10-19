@@ -1,5 +1,5 @@
 {
-  "name": "todoist",
+  "name": "dooeet",
   "version": "1.0.0",
   "description": "A To-Do-List Application",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andela-ltijesunimi-israel/todoist.git"
+    "url": "git+https://github.com/andela-ltijesunimi-israel/dooeet.git"
   },
   "author": "Lovelyn Tijesunimi-Israel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andela-ltijesunimi-israel/todoist/issues"
+    "url": "https://github.com/andela-ltijesunimi-israel/dooeet/issues"
   },
-  "homepage": "https://github.com/andela-ltijesunimi-israel/todoist#readme",
+  "homepage": "https://github.com/andela-ltijesunimi-israel/dooeet#readme",
   "dependencies": {
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.6",
