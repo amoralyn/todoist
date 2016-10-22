@@ -66,14 +66,12 @@
               message: 'No users found '
             });
           }
-          res.status(200).json(
-              users
-            )
-            .catch((err) => {
-              res.status(500).json(err);
-            })
+          res.status(200).json(users)
         })
-    }
+        .catch((err) => {
+          res.status(500).json(err);
+        })
+    },
     getUserById(req, res) {
       User.findById({ _id: req.params.id }, '-password -__v')
         .exec()

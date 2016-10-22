@@ -16,8 +16,8 @@
 
     router.use(auth.middleware);
     //route to get all available users
-    // router.route('/users')
-    //   .get(userController.getAllUsers);
+    router.route('/users')
+      .get(userController.getAllUsers);
 
     //route to get, edit and delete a user specified by its Id
     router.route('/users/:id')

@@ -21,8 +21,9 @@
         };
 
         return User
-          .findByIdAndUpdate(req.decoded.id, update, { safe: true, upsert: true })
+          .findByIdAndUpdate(req.decoded.id, update)
           .exec()
+          .populate('tasks')
           .then(() => {
             res.status(200).json(task)
           })

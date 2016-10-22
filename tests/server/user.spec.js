@@ -25,7 +25,7 @@
             }
             console.log(res.body, 'user');
             expect(res.body).to.be.an('object');
-            expect(res.body.username).to.eql(userCredentials.username);
+            expect(res.body.user.username).to.eql(userCredentials.username);
             expect(res.body).to.not.be.empty();
             done();
           });
@@ -150,8 +150,8 @@
           .end((err, res) => {
             let error = res.body;
             let expectedError = 'Authentication failed, User not found'
-            expect(error.status).to.be(404);
             expect(error.message).to.eql(expectedError);
+            expect(error.message).to.be.a('string');
             expect(error).to.be.an('object');
             done();
           });

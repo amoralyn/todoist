@@ -2,23 +2,30 @@
   'use strict';
   angular.module('dooeet')
     .controller('userController', [
-      '$scope', 'AuthService', '$window', '$state',
+      '$scope',
+      'AuthService',
+      '$window',
+      '$state',
 
       function($scope, AuthService, $window, $state) {
         $scope.user = {};
 
         $scope.login = function(data) {
-          AuthService.login(data).then(function(res) {
-            setUser(res);
-            $state.go('home');
-          })
+          AuthService
+            .login(data)
+            .then(function(res) {
+              setUser(res);
+              $state.go('home');
+            })
         };
 
         $scope.register = function(data) {
-          AuthService.register(data).then(function(res) {
-            setUser(res);
-            $state.go('home');
-          })
+          AuthService
+            .register(data)
+            .then(function(res) {
+              setUser(res);
+              $state.go('home');
+            })
         }
 
         $scope.logout = function() {

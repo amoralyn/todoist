@@ -1,7 +1,10 @@
 (() => {
   'use strict';
   angular.module('dooeet', ['ui.router'])
-    .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider',
+    .config(['$locationProvider',
+      '$stateProvider',
+      '$urlRouterProvider',
+      '$httpProvider',
       function($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
         $urlRouterProvider.otherwise('/login');
         $httpProvider.interceptors.push('TokenInjector');
@@ -22,14 +25,14 @@
       }
     ])
 
-  require('./../../app/scripts/factories/tokenInjector.js');
-  require('./../../app/scripts/controllers/home.js');
-  require('./../../app/scripts/controllers/login.js');
-  require('./../../app/scripts/controllers/task.js');
-  require('./../../app/scripts/controllers/subtask.js');
-  require('./../../app/scripts/controllers/timer.js');
-  require('./../../app/scripts/services/authService.js');
-  require('./../../app/scripts/services/taskService.js');
-  require('./../../app/scripts/services/subTaskService.js');
+  require('./factories/tokenInjector.js');
+  require('./controllers/home.js');
+  require('./controllers/login.js');
+  require('./controllers/task.js');
+  require('./controllers/subtask.js');
+  require('./controllers/timer.js');
+  require('./services/authService.js');
+  require('./services/taskService.js');
+  require('./services/subTaskService.js');
 
 })();

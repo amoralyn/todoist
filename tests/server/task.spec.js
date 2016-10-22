@@ -56,6 +56,7 @@
           if (err) {
             return done(err)
           }
+          console.log(res.body);
           expect(res.body).to.be.an('object');
           expect(res.body.title).to.eql(task.title);
           expect(res.body.description).to.be.a('string');
